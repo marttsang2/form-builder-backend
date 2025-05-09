@@ -3,8 +3,8 @@ import {
   CreateFormDto,
   QuestionType as DtoQuestionType,
   QuestionType,
-} from '@/forms/dto/create-form.dto';
-import { PrismaService } from '@/prisma/prisma.service';
+} from './dto/create-form.dto';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class FormsService {

@@ -7,8 +7,8 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
-import { FormsService } from '@/forms/forms.service';
-import { CreateFormDto } from '@/forms/dto/create-form.dto';
+import { FormsService } from './forms.service';
+import { CreateFormDto } from './dto/create-form.dto';
 import { ParseIntPipe } from '@nestjs/common';
 @Controller('forms')
 export class FormsController {

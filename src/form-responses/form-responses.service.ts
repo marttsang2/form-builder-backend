@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '@/prisma/prisma.service';
-import { CreateFormResponseDto } from '@/form-responses/dto/create-form-response.dto';
+import { PrismaService } from '../prisma/prisma.service';
+import { CreateFormResponseDto } from './dto/create-form-response.dto';
 
 @Injectable()
 export class FormResponsesService {

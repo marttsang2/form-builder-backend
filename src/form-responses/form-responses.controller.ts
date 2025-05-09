@@ -7,8 +7,8 @@ import {
   Query,
   ParseIntPipe,
 } from '@nestjs/common';
-import { FormResponsesService } from '@/form-responses/form-responses.service';
-import { CreateFormResponseDto } from '@/form-responses/dto/create-form-response.dto';
+import { FormResponsesService } from './form-responses.service';
+import { CreateFormResponseDto } from './dto/create-form-response.dto';
 
 /**
  * Controller for managing form responses
