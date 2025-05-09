@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Form {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  slug        String     @unique
+  questions   Question[]
+  responses   Response[]
+  locked    Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
+
+model Question {
+  id        String   @id @default(uuid())
+  form      Form     @relation(fields: [formId], references: [id])
+  formId    String
+  label     String
+  type      QuestionType
+  required  Boolean  @default(false)
+  order     Int
+  options   String[] @default([]) // for dropdown options
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  values FormResponseValue[]
+}
+
+model Response {
+  id        String   @id @default(uuid())
+  formId    String
+  form      Form     @relation(fields: [formId], references: [id])
+  createdAt DateTime @default(now())
+
+  values FormResponseValue[]
+}
+
+model FormResponseValue {
+  id        String   @id @default(uuid())
+  responseId String
+  response  Response @relation(fields: [responseId], references: [id])
+  questionId String
+  question  Question @relation(fields: [questionId], references: [id])
+  value     String
+  createdAt DateTime @default(now())
+}
+
+enum QuestionType {
+  TEXT
+  DROPDOWN
+  FILE
+}
